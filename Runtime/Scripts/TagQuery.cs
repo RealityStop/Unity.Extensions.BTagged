@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,7 +34,7 @@ namespace BOC.BTagged
 
 		protected abstract void OnGameObjectDisabled(GameObject obj);
 
-		public void Dispose()
+		public virtual void Dispose()
 		{
 			_query.RemoveListenerOnEnabled();
 			_query.RemoveListenerOnDisabled();
@@ -106,6 +106,15 @@ namespace BOC.BTagged
 		IEnumerator<T1> IEnumerable<T1>.GetEnumerator() => GetEnumerator();
 
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+		public override void Dispose()
+		{
+			base.Dispose();
+			foreach (var item in this)
+			{
+				OnItemRemoved?.Invoke(item);
+			}
+		}
 	}
 
 
@@ -164,6 +173,15 @@ namespace BOC.BTagged
 		IEnumerator<(T1, T2)> IEnumerable<(T1, T2)>.GetEnumerator() => GetEnumerator();
 
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+		
+		public override void Dispose()
+		{
+			base.Dispose();
+			foreach (var item in this)
+			{
+				OnItemRemoved?.Invoke(item);
+			}
+		}
 	}
 
 
@@ -223,6 +241,15 @@ namespace BOC.BTagged
 		IEnumerator<(T1, T2, T3)> IEnumerable<(T1, T2, T3)>.GetEnumerator() => GetEnumerator();
 
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+		
+		public override void Dispose()
+		{
+			base.Dispose();
+			foreach (var item in this)
+			{
+				OnItemRemoved?.Invoke(item);
+			}
+		}
 	}
 
 
@@ -286,6 +313,15 @@ namespace BOC.BTagged
 		IEnumerator<(T1, T2, T3, T4)> IEnumerable<(T1, T2, T3, T4)>.GetEnumerator() => GetEnumerator();
 
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+		
+		public override void Dispose()
+		{
+			base.Dispose();
+			foreach (var item in this)
+			{
+				OnItemRemoved?.Invoke(item);
+			}
+		}
 	}
 
 
@@ -349,6 +385,15 @@ namespace BOC.BTagged
 		IEnumerator<(T1, T2, T3, T4, T5)> IEnumerable<(T1, T2, T3, T4, T5)>.GetEnumerator() => GetEnumerator();
 
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+		
+		public override void Dispose()
+		{
+			base.Dispose();
+			foreach (var item in this)
+			{
+				OnItemRemoved?.Invoke(item);
+			}
+		}
 	}
 
 
@@ -416,5 +461,14 @@ namespace BOC.BTagged
 		IEnumerator<(T1, T2, T3, T4, T5, T6)> IEnumerable<(T1, T2, T3, T4, T5, T6)>.GetEnumerator() => GetEnumerator();
 
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+		
+		public override void Dispose()
+		{
+			base.Dispose();
+			foreach (var item in this)
+			{
+				OnItemRemoved?.Invoke(item);
+			}
+		}
 	}
 }
