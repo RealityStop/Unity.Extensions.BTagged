@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public interface ICollisionRepeater
+namespace BOC.BTagged
 {
-    Action<Collision2D> OnCollisionEnter { get; set; }
-    Action<Collision2D> OnCollisionExit { get; set; }
-    Action<Collision2D> OnCollisionStay { get; set; }
+	public interface ICollisionRepeater
+	{
+		Action<Collision> OnCollisionEnter { get; set; }
+		Action<Collision> OnCollisionExit { get; set; }
+		Action<Collision> OnCollisionStay { get; set; }
+	}
 }

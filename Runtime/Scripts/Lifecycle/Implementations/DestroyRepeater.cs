@@ -5,13 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-class DestroyRepeater : MonoBehaviour, IDestroyRepeater
+namespace BOC.BTagged
 {
-    Action<GameObject> IDestroyRepeater.OnDestroy { get; set; }
+	class DestroyRepeater : MonoBehaviour, IDestroyRepeater
+	{
+		Action<GameObject> IDestroyRepeater.OnDestroy { get; set; }
 
 
-    private void OnDestroy()
-    {
-        ((IDestroyRepeater)this).OnDestroy?.Invoke(gameObject);    
-    }
+		private void OnDestroy()
+		{
+			((IDestroyRepeater)this).OnDestroy?.Invoke(gameObject);    
+		}
+	}
 }

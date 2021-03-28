@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public interface ITriggerRepeater
+namespace BOC.BTagged
 {
-    Action<Collider2D> OnTriggerEnter { get; set; }
-    Action<Collider2D> OnTriggerExit { get; set; }
-    Action<Collider2D> OnTriggerStay { get; set; }
+	public interface ITriggerRepeater
+	{
+		Action<Collider> OnTriggerEnter { get; set; }
+		Action<Collider> OnTriggerExit { get; set; }
+		Action<Collider> OnTriggerStay { get; set; }
+	}
 }

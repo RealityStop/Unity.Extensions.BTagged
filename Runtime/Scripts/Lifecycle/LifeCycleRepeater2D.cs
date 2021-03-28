@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BOC.BTagged
 {
-	public class LifeCycleRepeater : MonoBehaviour
+	public class LifeCycleRepeater2D : MonoBehaviour
 	{
 		private IDestroyRepeater _ObjectDestroy;
 		public IDestroyRepeater ObjectDestroy
@@ -17,24 +17,24 @@ namespace BOC.BTagged
 			}
 		}
 
-		private ICollisionRepeater _ObjectCollision;
-		public ICollisionRepeater ObjectCollision
+		private ICollisionRepeater2D _ObjectCollision;
+		public ICollisionRepeater2D ObjectCollision
 		{
 			get
 			{
 				if (_ObjectCollision == null)
-					_ObjectCollision = gameObject.AddComponent<CollisionRepeater>();
+					_ObjectCollision = gameObject.AddComponent<CollisionRepeater2D>();
 				return _ObjectCollision;
 			}
 		}
 
-		private ITriggerRepeater _ObjectTriggers;
-		public ITriggerRepeater ObjectTriggers
+		private ITriggerRepeater2D _ObjectTriggers;
+		public ITriggerRepeater2D ObjectTriggers
 		{
 			get
 			{
 				if (_ObjectTriggers == null)
-					_ObjectTriggers = gameObject.AddComponent<TriggerRepeater>();
+					_ObjectTriggers = gameObject.AddComponent<TriggerRepeater2D>();
 				return _ObjectTriggers;
 			}
 		}

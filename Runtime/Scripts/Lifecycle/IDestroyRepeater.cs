@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDestroyRepeater
+namespace BOC.BTagged
 {
-    Action<GameObject> OnDestroy { get; set; }
+	public interface IDestroyRepeater
+	{
+		Action<GameObject> OnDestroy { get; set; }
+	}
 }
