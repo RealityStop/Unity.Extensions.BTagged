@@ -6,6 +6,7 @@ using UnityEngine;
 namespace BOC.BTagged
 {
 	public enum TagQueryChangeType { Add, Remove }
+	public enum MultiTagQueryStyle { All, Any }
 
 	public struct TagQueryChange<T>
 	{
@@ -34,9 +35,23 @@ namespace BOC.BTagged
 			foreach (var item in results) OnGameObjectEnabled(item);
 		}
 
-		public TagQueryBase(IEnumerable<Tag> tags)
+		
+		
+		public TagQueryBase(Tag tag)
 		{
-			_query = BTagged.FindAll(tags);
+			_query = BTagged.Find(tag);
+			_query.AddListenerOnEnabled(OnGameObjectEnabled);
+			_query.AddListenerOnDisabled(OnGameObjectDisabled);
+			var results = _query.GetGameObjects();
+			foreach (var item in results) OnGameObjectEnabled(item);
+		}
+		
+		public TagQueryBase(IEnumerable<Tag> tags, MultiTagQueryStyle queryStyle)
+		{
+			if (queryStyle == MultiTagQueryStyle.All)
+				_query = BTagged.FindAll(tags);
+			else
+				_query = BTagged.FindAny(tags);	
 			_query.AddListenerOnEnabled(OnGameObjectEnabled);
 			_query.AddListenerOnDisabled(OnGameObjectDisabled);
 			var results = _query.GetGameObjects();
@@ -78,12 +93,14 @@ namespace BOC.BTagged
 		{
 		}
 
-
-		public TagQuery(params Tag[] tags) : base(tags)
+		public TagQuery(Tag tag) : base(tag)
+		{
+		}
+		public TagQuery(MultiTagQueryStyle queryStyle, params Tag[] tags) : base(tags, queryStyle)
 		{
 		}
 
-		public TagQuery(IEnumerable<Tag> tags) : base(tags)
+		public TagQuery(IEnumerable<Tag> tags, MultiTagQueryStyle queryStyle) : base(tags, queryStyle)
 		{
 		}
 
@@ -171,10 +188,14 @@ namespace BOC.BTagged
 		public TagQuery(BTagged.BTaggedQueryGO query) : base(query)
 		{
 		}
-		public TagQuery(params Tag[] tags) : base(tags)
+		public TagQuery(Tag tag) : base(tag)
 		{
 		}
-		public TagQuery(IEnumerable<Tag> tags) : base(tags)
+		public TagQuery(MultiTagQueryStyle queryStyle, params Tag[] tags) : base(tags, queryStyle)
+		{
+		}
+
+		public TagQuery(IEnumerable<Tag> tags, MultiTagQueryStyle queryStyle) : base(tags, queryStyle)
 		{
 		}
 
@@ -261,13 +282,14 @@ namespace BOC.BTagged
 		public Action<(T1, T2, T3)> OnItemAdded  { get; set; }
 		public Action<(T1, T2, T3)> OnItemRemoved { get; set; }
 
-		public TagQuery(BTagged.BTaggedQueryGO query) : base(query)
+		public TagQuery(Tag tag) : base(tag)
 		{
 		}
-		public TagQuery(params Tag[] tags) : base(tags)
+		public TagQuery(MultiTagQueryStyle queryStyle, params Tag[] tags) : base(tags, queryStyle)
 		{
 		}
-		public TagQuery(IEnumerable<Tag> tags) : base(tags)
+
+		public TagQuery(IEnumerable<Tag> tags, MultiTagQueryStyle queryStyle) : base(tags, queryStyle)
 		{
 		}
 
@@ -361,10 +383,14 @@ namespace BOC.BTagged
 		public TagQuery(BTagged.BTaggedQueryGO query) : base(query)
 		{
 		}
-		public TagQuery(params Tag[] tags) : base(tags)
+		public TagQuery(Tag tag) : base(tag)
 		{
 		}
-		public TagQuery(IEnumerable<Tag> tags) : base(tags)
+		public TagQuery(MultiTagQueryStyle queryStyle, params Tag[] tags) : base(tags, queryStyle)
+		{
+		}
+
+		public TagQuery(IEnumerable<Tag> tags, MultiTagQueryStyle queryStyle) : base(tags, queryStyle)
 		{
 		}
 		
@@ -458,10 +484,14 @@ namespace BOC.BTagged
 		public TagQuery(BTagged.BTaggedQueryGO query) : base(query)
 		{
 		}
-		public TagQuery(params Tag[] tags) : base(tags)
+		public TagQuery(Tag tag) : base(tag)
 		{
 		}
-		public TagQuery(IEnumerable<Tag> tags) : base(tags)
+		public TagQuery(MultiTagQueryStyle queryStyle, params Tag[] tags) : base(tags, queryStyle)
+		{
+		}
+
+		public TagQuery(IEnumerable<Tag> tags, MultiTagQueryStyle queryStyle) : base(tags, queryStyle)
 		{
 		}
 
@@ -559,10 +589,14 @@ namespace BOC.BTagged
 		public TagQuery(BTagged.BTaggedQueryGO query) : base(query)
 		{
 		}
-		public TagQuery(params Tag[] tags) : base(tags)
+		public TagQuery(Tag tag) : base(tag)
 		{
 		}
-		public TagQuery(IEnumerable<Tag> tags) : base(tags)
+		public TagQuery(MultiTagQueryStyle queryStyle, params Tag[] tags) : base(tags, queryStyle)
+		{
+		}
+
+		public TagQuery(IEnumerable<Tag> tags, MultiTagQueryStyle queryStyle) : base(tags, queryStyle)
 		{
 		}
 
