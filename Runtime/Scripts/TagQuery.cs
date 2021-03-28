@@ -1,10 +1,24 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BOC.BTagged
 {
+	public enum TagQueryChangeType { Add, Remove }
+
+	public struct TagQueryChange<T>
+	{
+		public readonly TagQueryChangeType ChangeType;
+		public readonly T Item;
+
+		public TagQueryChange(TagQueryChangeType changeType, T change)
+		{
+			ChangeType = changeType;
+			Item = change;
+		}
+	}
+	
 	public abstract class TagQueryBase : IDisposable
 	{
 		private readonly BTagged.BTaggedQueryGO _query;
@@ -73,6 +87,32 @@ namespace BOC.BTagged
 		{
 		}
 
+		public IDisposable ObserveChanges(Action<TagQueryChange<T1>> onChange)
+		{
+			void AddFunc(T1 item)
+			{
+				onChange.Invoke(new TagQueryChange<T1>(TagQueryChangeType.Add, item));
+			}
+
+			void RemoveFunc(T1 item)
+			{
+				onChange.Invoke(new TagQueryChange<T1>(TagQueryChangeType.Remove, item));
+			}
+			
+			foreach (var item in this)
+			{
+				AddFunc(item);
+			}
+
+			OnItemAdded += AddFunc;
+			OnItemRemoved += RemoveFunc;
+
+			return Disposable.Create(() =>
+			{
+				OnItemAdded -= AddFunc;
+				OnItemRemoved -= RemoveFunc;
+			});
+		}
 		protected override void OnGameObjectEnabled(GameObject go)
 		{
 			//Not sure if the backing data would prevent duplicate adds or not.  Contains to prevent throws might not be necessary
@@ -138,6 +178,33 @@ namespace BOC.BTagged
 		{
 		}
 
+		public IDisposable ObserveChanges(Action<TagQueryChange<(T1,T2)>> onChange)
+		{
+			void AddFunc((T1,T2) item)
+			{
+				onChange.Invoke(new TagQueryChange<(T1,T2)>(TagQueryChangeType.Add, item));
+			}
+
+			void RemoveFunc((T1,T2) item)
+			{
+				onChange.Invoke(new TagQueryChange<(T1,T2)>(TagQueryChangeType.Remove, item));
+			}
+			
+			foreach (var item in this)
+			{
+				AddFunc(item);
+			}
+
+			OnItemAdded += AddFunc;
+			OnItemRemoved += RemoveFunc;
+
+			return Disposable.Create(() =>
+			{
+				OnItemAdded -= AddFunc;
+				OnItemRemoved -= RemoveFunc;
+			});
+		}
+		
 		protected override void OnGameObjectEnabled(GameObject go)
 		{
 			//Not sure if the backing data would prevent duplicate adds or not.  Contains to prevent throws might not be necessary
@@ -204,6 +271,33 @@ namespace BOC.BTagged
 		{
 		}
 
+		public IDisposable ObserveChanges(Action<TagQueryChange<(T1,T2,T3)>> onChange)
+		{
+			void AddFunc((T1,T2,T3) item)
+			{
+				onChange.Invoke(new TagQueryChange<(T1,T2,T3)>(TagQueryChangeType.Add, item));
+			}
+
+			void RemoveFunc((T1,T2,T3) item)
+			{
+				onChange.Invoke(new TagQueryChange<(T1,T2,T3)>(TagQueryChangeType.Remove, item));
+			}
+			
+			foreach (var item in this)
+			{
+				AddFunc(item);
+			}
+
+			OnItemAdded += AddFunc;
+			OnItemRemoved += RemoveFunc;
+
+			return Disposable.Create(() =>
+			{
+				OnItemAdded -= AddFunc;
+				OnItemRemoved -= RemoveFunc;
+			});
+		}
+		
 		protected override void OnGameObjectEnabled(GameObject go)
 		{
 			//Not sure if the backing data would prevent duplicate adds or not.  Contains to prevent throws might not be necessary
@@ -272,6 +366,33 @@ namespace BOC.BTagged
 		}
 		public TagQuery(IEnumerable<Tag> tags) : base(tags)
 		{
+		}
+		
+		public IDisposable ObserveChanges(Action<TagQueryChange<(T1,T2,T3,T4)>> onChange)
+		{
+			void AddFunc((T1,T2,T3,T4) item)
+			{
+				onChange.Invoke(new TagQueryChange<(T1,T2,T3,T4)>(TagQueryChangeType.Add, item));
+			}
+
+			void RemoveFunc((T1,T2,T3,T4) item)
+			{
+				onChange.Invoke(new TagQueryChange<(T1,T2,T3,T4)>(TagQueryChangeType.Remove, item));
+			}
+			
+			foreach (var item in this)
+			{
+				AddFunc(item);
+			}
+
+			OnItemAdded += AddFunc;
+			OnItemRemoved += RemoveFunc;
+
+			return Disposable.Create(() =>
+			{
+				OnItemAdded -= AddFunc;
+				OnItemRemoved -= RemoveFunc;
+			});
 		}
 
 		protected override void OnGameObjectEnabled(GameObject go)
@@ -344,6 +465,33 @@ namespace BOC.BTagged
 		{
 		}
 
+		public IDisposable ObserveChanges(Action<TagQueryChange<(T1,T2,T3,T4,T5)>> onChange)
+		{
+			void AddFunc((T1,T2,T3,T4,T5) item)
+			{
+				onChange.Invoke(new TagQueryChange<(T1,T2,T3,T4,T5)>(TagQueryChangeType.Add, item));
+			}
+
+			void RemoveFunc((T1,T2,T3,T4,T5) item)
+			{
+				onChange.Invoke(new TagQueryChange<(T1,T2,T3,T4,T5)>(TagQueryChangeType.Remove, item));
+			}
+			
+			foreach (var item in this)
+			{
+				AddFunc(item);
+			}
+
+			OnItemAdded += AddFunc;
+			OnItemRemoved += RemoveFunc;
+
+			return Disposable.Create(() =>
+			{
+				OnItemAdded -= AddFunc;
+				OnItemRemoved -= RemoveFunc;
+			});
+		}
+		
 		protected override void OnGameObjectEnabled(GameObject go)
 		{
 			//Not sure if the backing data would prevent duplicate adds or not.  Contains to prevent throws might not be necessary
@@ -418,6 +566,33 @@ namespace BOC.BTagged
 		{
 		}
 
+		public IDisposable ObserveChanges(Action<TagQueryChange<(T1,T2,T3,T4,T5,T6)>> onChange)
+		{
+			void AddFunc((T1,T2,T3,T4,T5,T6) item)
+			{
+				onChange.Invoke(new TagQueryChange<(T1,T2,T3,T4,T5,T6)>(TagQueryChangeType.Add, item));
+			}
+
+			void RemoveFunc((T1,T2,T3,T4,T5,T6) item)
+			{
+				onChange.Invoke(new TagQueryChange<(T1,T2,T3,T4,T5,T6)>(TagQueryChangeType.Remove, item));
+			}
+			
+			foreach (var item in this)
+			{
+				AddFunc(item);
+			}
+
+			OnItemAdded += AddFunc;
+			OnItemRemoved += RemoveFunc;
+
+			return Disposable.Create(() =>
+			{
+				OnItemAdded -= AddFunc;
+				OnItemRemoved -= RemoveFunc;
+			});
+		}
+		
 		protected override void OnGameObjectEnabled(GameObject go)
 		{
 			//Not sure if the backing data would prevent duplicate adds or not.  Contains to prevent throws might not be necessary
