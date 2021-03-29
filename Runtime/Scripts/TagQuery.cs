@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -135,8 +135,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate adds or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1))
 			{
-				_components.Add(c1);
-				OnItemAdded?.Invoke(c1);
+				if (!_components.Contains(c1))
+				{
+					_components.Add(c1);
+					OnItemAdded?.Invoke(c1);
+				}
 			}
 		}
 
@@ -145,8 +148,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate removes or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1))
 			{
-				_components.Remove(c1);
-				OnItemRemoved?.Invoke(c1);
+				if (_components.Contains(c1))
+				{
+					_components.Remove(c1);
+					OnItemRemoved?.Invoke(c1);
+				}
 			}
 		}
 
@@ -231,8 +237,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate adds or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1, out T2 c2))
 			{
-				_components.Add((c1, c2));
-				OnItemAdded?.Invoke((c1, c2));
+				if (!_components.Contains((c1, c2)))
+				{
+					_components.Add((c1, c2));
+					OnItemAdded?.Invoke((c1, c2));
+				}
 			}
 		}
 
@@ -241,8 +250,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate removes or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1, out T2 c2))
 			{
-				_components.Remove((c1, c2));
-				OnItemRemoved?.Invoke((c1, c2));
+				if (_components.Contains((c1, c2)))
+				{
+					_components.Remove((c1, c2));
+					OnItemRemoved?.Invoke((c1, c2));
+				}
 			}
 		}
 
@@ -325,8 +337,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate adds or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1, out T2 c2, out T3 c3))
 			{
-				_components.Add((c1, c2, c3));
-				OnItemAdded?.Invoke((c1, c2, c3));
+				if (!_components.Contains((c1, c2, c3)))
+				{
+					_components.Add((c1, c2, c3));
+					OnItemAdded?.Invoke((c1, c2, c3));
+				}
 			}
 		}
 
@@ -335,8 +350,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate removes or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1, out T2 c2, out T3 c3))
 			{
-				_components.Remove((c1, c2, c3));
-				OnItemRemoved?.Invoke((c1, c2, c3));
+				if (_components.Contains((c1, c2, c3)))
+				{
+					_components.Remove((c1, c2, c3));
+					OnItemRemoved?.Invoke((c1, c2, c3));
+				}
 			}
 		}
 
@@ -426,8 +444,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate adds or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1, out T2 c2, out T3 c3, out T4 c4))
 			{
-				_components.Add((c1, c2, c3, c4));
-				OnItemAdded?.Invoke((c1, c2, c3, c4));
+				if (!_components.Contains((c1, c2, c3, c4)))
+				{
+					_components.Add((c1, c2, c3, c4));
+					OnItemAdded?.Invoke((c1, c2, c3, c4));
+				}
 			}
 		}
 
@@ -436,8 +457,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate removes or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1, out T2 c2, out T3 c3, out T4 c4))
 			{
-				_components.Remove((c1, c2, c3, c4));
-				OnItemRemoved?.Invoke((c1, c2, c3, c4));
+				if (_components.Contains((c1, c2, c3, c4)))
+				{
+					_components.Remove((c1, c2, c3, c4));
+					OnItemRemoved?.Invoke((c1, c2, c3, c4));
+				}
 			}
 		}
 
@@ -527,8 +551,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate adds or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1, out T2 c2, out T3 c3, out T4 c4, out T5 c5))
 			{
-				_components.Add((c1, c2, c3, c4, c5));
-				OnItemAdded?.Invoke((c1, c2, c3, c4, c5));
+				if (!_components.Contains((c1, c2, c3, c4, c5)))
+				{
+					_components.Add((c1, c2, c3, c4, c5));
+					OnItemAdded?.Invoke((c1, c2, c3, c4, c5));
+				}
 			}
 		}
 
@@ -537,8 +564,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate removes or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1, out T2 c2, out T3 c3, out T4 c4, out T5 c5))
 			{
-				_components.Remove((c1, c2, c3, c4, c5));
-				OnItemRemoved?.Invoke((c1, c2, c3, c4, c5));
+				if (_components.Contains((c1, c2, c3, c4, c5)))
+				{
+					_components.Remove((c1, c2, c3, c4, c5));
+					OnItemRemoved?.Invoke((c1, c2, c3, c4, c5));
+				}
 			}
 		}
 
@@ -632,8 +662,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate adds or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1, out T2 c2, out T3 c3, out T4 c4, out T5 c5, out T6 c6))
 			{
-				_components.Add((c1, c2, c3, c4, c5, c6));
-				OnItemAdded((c1, c2, c3, c4, c5, c6));
+				if (!_components.Contains((c1, c2, c3, c4, c5, c6)))
+				{
+					_components.Add((c1, c2, c3, c4, c5, c6));
+					OnItemAdded((c1, c2, c3, c4, c5, c6));
+				}
 			}
 		}
 
@@ -642,8 +675,11 @@ namespace BOC.BTagged
 			//Not sure if the backing data would prevent duplicate removes or not.  Contains to prevent throws might not be necessary
 			if (Has(go, out T1 c1, out T2 c2, out T3 c3, out T4 c4, out T5 c5, out T6 c6))
 			{
-				_components.Remove((c1, c2, c3, c4, c5, c6));
-				OnItemRemoved((c1, c2, c3, c4, c5, c6));
+				if (_components.Contains((c1, c2, c3, c4, c5, c6)))
+				{
+					_components.Remove((c1, c2, c3, c4, c5, c6));
+					OnItemRemoved((c1, c2, c3, c4, c5, c6));
+				}
 			}
 		}
 
